@@ -1,6 +1,6 @@
 NAME	=	philo
 
-OBJ		=	
+OBJ		=	philo.c
 
 srcs	=	$(patsubstr %.c %.o $(OBJ))
 
