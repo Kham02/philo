@@ -1,4 +1,4 @@
-#include "philo_h"
+#include "philo.h"
 
 int	ft_isdigit(int c)
 {
@@ -61,7 +61,7 @@ void	check(int ac, char **av, t_data *data, t_philo *philo)
 	if (ac == 5)
 		data->num_repeat = philo_atoi(data, av[5], 0, 1);
 	else
-		data->num->repeat = 0;
+		data->num_repeat = 0;
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->num_philo);
 	
 }
@@ -71,11 +71,11 @@ int	main(int ac, char **av)
 	t_philo	*philo;
 	t_data	*data;
 
-	data = (t_data *)malloc(sizeof(t_data);)
+	data = (t_data *)malloc(sizeof(t_data));
 	if (ac < 4 || ac > 5)
 	{
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	check(ac, av, data);
+	check(ac, av, data, philo);
 }
