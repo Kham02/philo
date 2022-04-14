@@ -54,28 +54,41 @@ void	check_int(t_data *data, char *str)
 
 void	check(int ac, char **av, t_data *data, t_philo *philo)
 {
-	data->num_philo = philo_atoi(data, av[1], 0, 1);
-	data->time_die = philo_atoi(data, av[2], 0, 1);
-	data->time_eat = philo_atoi(data, av[3], 0, 1);
-	data->time_sleep = philo_atoi(data, av[4], 0, 1);
+	if (data->num_philo = philo_atoi(data, av[1], 0, 1) < 1)
+		return (0);
+	if (data->time_die = philo_atoi(data, av[2], 0, 1) < 1)
+		error("", data, philo);
+	if (data->time_eat = philo_atoi(data, av[3], 0, 1) < 1)
+		error("", data, philo);
+	if (data->time_sleep = philo_atoi(data, av[4], 0, 1) < 1)
+		error("", data, philo);
 	if (ac == 5)
-		data->num_repeat = philo_atoi(data, av[5], 0, 1);
+	{
+		if (data->num_repeat = philo_atoi(data, av[5], 0, 1) < 1)
+			return (0);
+	}
 	else
-		data->num_repeat = 0;
+		data->num_repeat = 1;
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->num_philo);
-	
+	init_philo(philo, data);
 }
 
 int	main(int ac, char **av)
 {
 	t_philo	*philo;
 	t_data	*data;
+	pthread_mutex_t	*forks;
 
+	philo = NULL;
 	data = (t_data *)malloc(sizeof(t_data));
+	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (data == NULL || forks == NULL)
+		error("", data, philo);
 	if (ac < 4 || ac > 5)
 	{
-		write(1, "Error\n", 6);
+		write(1, "Error: incorrect number of parameters\n", 6);
 		return (0);
 	}
 	check(ac, av, data, philo);
+	forks_init(data, philo, forks);
 }

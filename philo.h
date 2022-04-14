@@ -16,6 +16,7 @@ typedef struct s_philo
 	t_data			*data;
 	struct s_philo	*next;
 	struct s_philo	*prev;
+	pthread_mutex_t	*forks_r;
 }t_philo;
 
 typedef struct s_data
@@ -28,19 +29,18 @@ typedef struct s_data
 	int		num_repeat;
 }t_data;
 
-typedef struct s_forks
-{
-	int	left;
-	int	right;
-}t_forks;
 
-
-/*########### func ##############*/
+/*############# func ##############*/
 
 void	check(int ac, char **av, t_data *data, t_philo *philo);
 int		philo_atoi(t_data *data, char *str, unsigned int n, int s);
 void	check_int(t_data *data, char *str);
 int		ft_isdigit(int c);
+int		free_ph(t_philo *philo, t_data *data);
+void	error(char *str, t_data *data, t_philo *philo);
+void	*philo_init(t_philo *philo, t_data *data);
+void	list_add_back(t_philo *philo, t_philo *lst_new);
+t_philo	*list_new(t_data *data, t_philo *philo, int i);
 
 
 #endif
