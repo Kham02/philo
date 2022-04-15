@@ -27,3 +27,15 @@ void	error(char *str, t_data *data, t_philo *philo)
 	free_ph(philo, data);
 	return (0);
 }
+
+void	destr_forks(t_philo *philo)
+{
+	t_philo	*lst;
+
+	lst = philo;
+	while (lst)
+	{
+		pthrear_mutex_destroy(lst->forks_r, NULL);
+		lst = lst->next;
+	}
+}

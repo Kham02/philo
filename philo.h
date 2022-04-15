@@ -11,7 +11,7 @@ typedef struct s_philo
 	pthread_t		t;
 	int				id;
 	int				eat_status;
-	int				think_status;
+	int				die_status;
 	int				sleep_status;
 	t_data			*data;
 	struct s_philo	*next;
@@ -21,18 +21,20 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	pthread_t		th;
 	size_t	time_eat;
 	size_t	time_sleep;
 	size_t	time_die;
 	int		num_philo;
 	int		num_fork;
 	int		num_repeat;
+	int		all_eat_status;
 }t_data;
 
 
 /*############# func ##############*/
 
-void	check(int ac, char **av, t_data *data, t_philo *philo);
+int		check(int ac, char **av, t_data *data, t_philo *philo);
 int		philo_atoi(t_data *data, char *str, unsigned int n, int s);
 void	check_int(t_data *data, char *str);
 int		ft_isdigit(int c);
