@@ -39,7 +39,7 @@ t_philo	*list_new(t_data *data, t_philo *philo, int i)
 {
 	t_philo	*lst_new;
 
-	lst_new->eat_status = -1;
+	lst_new->eat_status = -data->num_repeat;
 	lst_new->id = i;
 	lst_new->next = NULL;
 	lst_new->prev = NULL;

@@ -84,17 +84,19 @@ int	main(int ac, char **av)
 	data = (t_data *)malloc(sizeof(t_data));
 	if (data == NULL || forks == NULL || ac < 4 || ac > 5)
 	{
-		error("Error\n", data, philo);
-		return (0);
+		return (error("Error\n", data, philo));
+		// return (0);
 	}
 	if (check(ac, av, data, philo) == -1)
 	{
-		error("Error\n", data, philo);
-		return (0);
+		return (error("Error\n", data, philo));
+		// return (0);
 	}
 	if (forks_init(data, philo) == -1)
 	{
-		error("Error mutex\n", data, philo);
-		return (0);
+		return (error("Error mutex\n", data, philo));
+		// return (0);
 	}
+	create_stream(data, philo);
+	return (0);
 }
