@@ -1,6 +1,6 @@
 NAME	=	philo
 
-OBJ		=	philo.c
+OBJ		=	philo.c	init.c	end.c	stream.c
 
 srcs	=	$(patsubstr %.c %.o $(OBJ))
 
@@ -15,18 +15,15 @@ FLAGS	=	-Wall -Wextra -Werror -I$(HEADER)
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJ) $(HEADER)
-		$(MAKE) -C ./Libft
-		$(CC) $(FLAGS) $(OBJ) Libft/libft.a -o $(NAME)
+		$(CC) $(FLAGS) $(OBJ) $(NAME)
 
 %.o	: %.c $(HEADER)
 		$(CC) $(FLAGS) -c $< -o $@
 
 clean	:
-	@make clean -C Libft
 	rm -rf $(SRCS)
 
 fclean	:
-	@make fclean -C Libft
 	rm -rf $(NAME)
 
 re	:

@@ -8,7 +8,7 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	philo_atoi(t_data *data, char *str, unsigned int n, int s)
+int	philo_atoi(t_data *data, t_philo *philo, char *str, unsigned int n, int s)
 {
 	int	i;
 
@@ -22,18 +22,18 @@ int	philo_atoi(t_data *data, char *str, unsigned int n, int s)
 	}
 	if (str[i] == '+' && s == 1)
 		i++;
-	check_int(data, str);
+	check_int(data, philo, str);
 	while (str[i] > 47 && str[i] < 58)
 	{
 		n = n * 10 + (str[i] - 48);
 		i++;
 		if ((n > 2147483647 && s == 1) || (n > 2147483648 && s == -1))
-			error(data);
+			return (error("", data, philo));
 	}
 	return (n * s);
 }
 
-void	check_int(t_data *data, char *str)
+int	check_int(t_data *data, t_philo *philo, char *str)
 {
 	int	i;
 
@@ -47,24 +47,25 @@ void	check_int(t_data *data, char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			error(data);
+			return (error("", data, philo));
 		i++;
 	}
+	return (0);
 }
 
 int	check(int ac, char **av, t_data *data, t_philo *philo)
 {
-	if (data->num_philo = philo_atoi(data, av[1], 0, 1) < 1)
+	if (data->num_philo == philo_atoi(data, philo, av[1], 0, 1) < 1)
 		return (-1);
-	if (data->time_die = philo_atoi(data, av[2], 0, 1) < 1)
+	if (data->time_die == philo_atoi(data, philo, av[2], 0, 1) < 1)
 		return (-1);
-	if (data->time_eat = philo_atoi(data, av[3], 0, 1) < 1)
+	if (data->time_eat == philo_atoi(data, philo, av[3], 0, 1) < 1)
 		return (-1);
-	if (data->time_sleep = philo_atoi(data, av[4], 0, 1) < 1)
+	if (data->time_sleep == philo_atoi(data, philo, av[4], 0, 1) < 1)
 		return (-1);
 	if (ac == 5)
 	{
-		if (data->num_repeat = philo_atoi(data, av[5], 0, 1) < 1)
+		if (data->num_repeat == philo_atoi(data, philo, av[5], 0, 1) < 1)
 			return (-1);
 	}
 	else
@@ -72,7 +73,8 @@ int	check(int ac, char **av, t_data *data, t_philo *philo)
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->num_philo);
 	if (philo == NULL)
 		return (-1);
-	init_philo(philo, data);
+	philo_init(philo, data);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -82,21 +84,11 @@ int	main(int ac, char **av)
 
 	philo = NULL;
 	data = (t_data *)malloc(sizeof(t_data));
-	if (data == NULL || forks == NULL || ac < 4 || ac > 5)
-	{
-		return (error("Error\n", data, philo));
-		// return (0);
-	}
+	if (data == NULL || ac < 4 || ac > 5)
+		return(error("Error\n", data, philo));
 	if (check(ac, av, data, philo) == -1)
-	{
-		return (error("Error\n", data, philo));
-		// return (0);
-	}
-	if (forks_init(data, philo) == -1)
-	{
-		return (error("Error mutex\n", data, philo));
-		// return (0);
-	}
+		return(error("Error\n", data, philo));
+	forks_init(data, philo);
 	create_stream(data, philo);
 	return (0);
 }

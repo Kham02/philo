@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	*philo_init(t_philo *philo, t_data *data)
+void	philo_init(t_philo *philo, t_data *data)
 {
 	t_philo	*lst;
 	int	i;
@@ -39,17 +39,18 @@ t_philo	*list_new(t_data *data, t_philo *philo, int i)
 {
 	t_philo	*lst_new;
 
+	lst_new = philo;
 	lst_new->eat_status = -data->num_repeat;
 	lst_new->id = i;
 	lst_new->next = NULL;
 	lst_new->prev = NULL;
-	lst_new->sleep_status = -1;
-	lst_new->die_status = 0;
+	// lst_new->sleep_status = -1;
+	// lst_new->die_status = 0;
 	lst_new->data = data;
 	return (lst_new);
 }
 
-void	*forks_init(t_data *data, t_philo *philo)
+int	forks_init(t_data *data, t_philo *philo)
 {
 	t_philo	*lst;
 
@@ -57,10 +58,8 @@ void	*forks_init(t_data *data, t_philo *philo)
 	while (lst)
 	{
 		if (pthread_mutex_init(&lst->forks_r, NULL) != 0)
-		{
-			error("", data, philo);
-			return (-1);
-		}
+			return (error("", data, philo));
 		lst = lst->next;
 	}
+	return (0);
 }

@@ -21,11 +21,11 @@ int	free_ph(t_philo *philo, t_data *data)
 	return (0);
 }
 
-void	error(char *str, t_data *data, t_philo *philo)
+int	error(char *str, t_data *data, t_philo *philo)
 {
 	printf("%s\n", str);
 	free_ph(philo, data);
-	return (0);
+	return (EXIT_FAILURE);
 }
 
 void	destr_forks(t_philo *philo)
@@ -35,7 +35,7 @@ void	destr_forks(t_philo *philo)
 	lst = philo;
 	while (lst)
 	{
-		pthrear_mutex_destroy(lst->forks_r, NULL);
+		pthread_mutex_destroy(lst->forks_r);
 		lst = lst->next;
 	}
 }
