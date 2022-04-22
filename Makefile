@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: estrong <estrong@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/22 15:20:15 by estrong           #+#    #+#              #
+#    Updated: 2022/04/22 17:24:41 by estrong          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	=	philo
 
 OBJ		=	philo.c	init.c	end.c	stream.c
@@ -15,7 +27,7 @@ FLAGS	=	-Wall -Wextra -Werror -I$(HEADER)
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJ) $(HEADER)
-		$(CC) $(FLAGS) $(OBJ) $(NAME)
+		$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o	: %.c $(HEADER)
 		$(CC) $(FLAGS) -c $< -o $@

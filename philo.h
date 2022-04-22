@@ -26,7 +26,7 @@ typedef struct s_philo
 	pthread_t		t;
 	int				id;
 	int				eat_status;
-	// int				die_status;
+	int				die_status;
 	// int				sleep_status;
 	t_data			*data;
 	struct s_philo	*next;
@@ -37,20 +37,24 @@ typedef struct s_philo
 /*############# func ##############*/
 
 int		check(int ac, char **av, t_data *data, t_philo *philo);
-int		philo_atoi(t_data *data, t_philo *philo, char *str, unsigned int n, int s);
-int		check_int(t_data *data, t_philo *philo, char *str);
+int		philo_atoi(t_philo *philo, char *str, unsigned int n, int s);
+int		check_int(t_philo *philo, char *str);
 int		ft_isdigit(int c);
-int		free_ph(t_philo *philo, t_data *data);
-int		error(char *str, t_data *data, t_philo *philo);
+int		free_ph(t_philo *philo);
+int		error(char *str, t_philo *philo);
 void	philo_init(t_philo *philo, t_data *data);
 void	list_add_back(t_philo *philo, t_philo *lst_new);
 t_philo	*list_new(t_data *data, t_philo *philo, int i);
-int		forks_init(t_data *data, t_philo *philo);
+int		forks_init(t_philo *philo);
 void	create_stream(t_data *data, t_philo *philo);
 void	time_add(t_data *data);
 void	philo_life(t_philo *philo);
 
-void	check_die(t_philo *philo);
+int		check_die(t_philo *philo);
+int		die(t_philo *lst, t_philo *philo);
+void	destr_forks(t_philo *philo);
 
+/*############# deb ##############*/
+void	print(t_philo *list);
 
 #endif

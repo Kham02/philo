@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/22 15:20:22 by estrong           #+#    #+#             */
+/*   Updated: 2022/04/22 18:50:01 by estrong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_isdigit(int c)
@@ -8,7 +20,7 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	philo_atoi(t_data *data, t_philo *philo, char *str, unsigned int n, int s)
+int	philo_atoi(t_philo *philo, char *str, unsigned int n, int s)
 {
 	int	i;
 
@@ -22,18 +34,18 @@ int	philo_atoi(t_data *data, t_philo *philo, char *str, unsigned int n, int s)
 	}
 	if (str[i] == '+' && s == 1)
 		i++;
-	check_int(data, philo, str);
+	check_int(philo, str);
 	while (str[i] > 47 && str[i] < 58)
 	{
 		n = n * 10 + (str[i] - 48);
 		i++;
 		if ((n > 2147483647 && s == 1) || (n > 2147483648 && s == -1))
-			return (error("", data, philo));
+			return (error("", philo));
 	}
 	return (n * s);
 }
 
-int	check_int(t_data *data, t_philo *philo, char *str)
+int	check_int(t_philo *philo, char *str)
 {
 	int	i;
 
@@ -47,7 +59,7 @@ int	check_int(t_data *data, t_philo *philo, char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (error("", data, philo));
+			return (error("", philo));
 		i++;
 	}
 	return (0);
@@ -55,19 +67,12 @@ int	check_int(t_data *data, t_philo *philo, char *str)
 
 int	check(int ac, char **av, t_data *data, t_philo *philo)
 {
-	if (data->num_philo == philo_atoi(data, philo, av[1], 0, 1) < 1)
-		return (-1);
-	if (data->time_die == philo_atoi(data, philo, av[2], 0, 1) < 1)
-		return (-1);
-	if (data->time_eat == philo_atoi(data, philo, av[3], 0, 1) < 1)
-		return (-1);
-	if (data->time_sleep == philo_atoi(data, philo, av[4], 0, 1) < 1)
-		return (-1);
-	if (ac == 5)
-	{
-		if (data->num_repeat == philo_atoi(data, philo, av[5], 0, 1) < 1)
-			return (-1);
-	}
+	data->num_philo = philo_atoi(philo, av[1], 0, 1);
+	data->time_die = philo_atoi(philo, av[2], 0, 1);
+	data->time_eat = philo_atoi(philo, av[3], 0, 1);
+	data->time_sleep = philo_atoi(philo, av[4], 0, 1);
+	if (ac == 6)
+		data->num_repeat = philo_atoi(philo, av[5], 0, 1);
 	else
 		data->num_repeat = 1;
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->num_philo);
@@ -84,11 +89,30 @@ int	main(int ac, char **av)
 
 	philo = NULL;
 	data = (t_data *)malloc(sizeof(t_data));
-	if (data == NULL || ac < 4 || ac > 5)
-		return(error("Error\n", data, philo));
+	if (data == NULL || ac < 5 || ac > 6)
+		return(error("Error\n", philo));
 	if (check(ac, av, data, philo) == -1)
-		return(error("Error\n", data, philo));
-	forks_init(data, philo);
+		return(error("Error\n", philo));
+	forks_init(philo);
 	create_stream(data, philo);
+	write (1, "do\n", 3);
+	if (data)
+	{
+		free(data);
+		data = NULL;
+	}
 	return (0);
 }
+
+// void	print(t_philo *list)
+// {
+// 	t_philo *p;
+// 	p = list;
+// 	printf("\033[38;05;32;48;05;232m""| id |\t|eat_status|\t| die_status |""\033[m""\n");
+// 	while (p->next != NULL)
+// 	{
+// 		printf("\033[38;05;115m""  %d\t  %d\t  %d""\033[m""\n", \
+// 		(int)p->id, (int)p->eat_status, p->die_status);
+// 		p = p->next;
+// 	}
+// }
