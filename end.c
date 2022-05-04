@@ -6,7 +6,7 @@
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:20:29 by estrong           #+#    #+#             */
-/*   Updated: 2022/04/22 17:13:35 by estrong          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:26:36 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	free_ph(t_philo *philo)
 	return (0);
 }
 
-int	die(t_philo *lst, t_philo *philo)
+void	*die(t_philo *lst, t_philo *philo)
 {
 	printf("%d %s\n", lst->id, "die");
 	destr_forks(philo);
 	free_ph(philo);
-	return (0);
+	return (NULL);
 }
 
 int	error(char *str, t_philo *philo)

@@ -48,10 +48,10 @@ t_philo	*list_new(t_data *data, t_philo *philo, int i);
 int		forks_init(t_philo *philo);
 void	create_stream(t_data *data, t_philo *philo);
 void	time_add(t_data *data);
-void	philo_life(t_philo *philo);
+void	*philo_life(void *lst);
 
-int		check_die(t_philo *philo);
-int		die(t_philo *lst, t_philo *philo);
+void	*check_die(void *list);
+void	*die(t_philo *lst, t_philo *philo);
 void	destr_forks(t_philo *philo);
 
 /*############# deb ##############*/
