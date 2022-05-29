@@ -23,7 +23,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		t;
+	pthread_t		*t;
 	int				id;
 	int				eat_status;
 	int				die_status;

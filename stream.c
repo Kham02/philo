@@ -19,14 +19,15 @@ void	create_stream(t_data *data, t_philo *philo)
 
 	i = 0;
 	lst = philo;
+	// arr malloc
 	time_add(data);
 	while(i < data->num_philo)
 	{
-		pthread_create(&lst->t, 0, philo_life, lst);
+		pthread_create(&lst->t[i], 0, philo_life, lst);
 		write(1, "trtr\n", 5);
-		pthread_detach(lst->t);
-		i++;
+		pthread_detach(lst->t[i]);
 		lst = lst->next;
+		i++;
 	}
 	i = 0;
 	pthread_create(&data->th, 0, check_die, philo);
@@ -41,6 +42,7 @@ void	time_add(t_data *data)
 	data->time = time.tv_sec * 1000 + time.tv_usec / 1000;
 }
 
+//make it readable
 void	*philo_life(void *lst)
 {
 	t_philo	*philo;
