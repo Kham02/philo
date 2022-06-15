@@ -6,7 +6,7 @@
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 22:06:15 by estrong           #+#    #+#             */
-/*   Updated: 2022/06/15 22:06:18 by estrong          ###   ########.fr       */
+/*   Updated: 2022/06/15 23:33:38 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	free_memory(t_all **all, t_list **philo)
 
 int	main(int ac, char **av)
 {
-	t_all		*all;
+	t_all	*all;
 	t_list	*philo;
 
 	all = ft_calloc(1, sizeof(t_all));
