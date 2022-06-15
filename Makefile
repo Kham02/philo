@@ -5,39 +5,74 @@
 #                                                     +:+ +:+         +:+      #
 #    By: estrong <estrong@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/22 15:20:15 by estrong           #+#    #+#              #
-#    Updated: 2022/05/04 16:12:08 by estrong          ###   ########.fr        #
+#    Created: 2022/06/15 22:07:20 by estrong           #+#    #+#              #
+#    Updated: 2022/06/15 22:09:36 by estrong          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	philo
+CC			=	cc
+FLAGS		=	-Wall -Wextra -Werror
+OPTFLAGS	=	-O2
 
-OBJ		=	philo.c	init.c	end.c	stream.c
+RM			=	rm -rf
+AR			=	ar rcs
 
-srcs	=	$(patsubstr %.c,%.o,$(OBJ))
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HEADER = philo.h
+NAME 	=	philo
+LIB		=	philo.a
 
-CC		=	gcc
+HDRS	=	philo.h
 
-FLAGS	=	-Wall -Wextra -Werror -I $(HEADER)
+FLDR_S	=	srcs/
+FLDR_H	=	hdrs/
 
-.PHONY	:	all clean fclean re
+MAIN_F	=	main.c
 
-all	:	$(NAME)
+SRCS	=	libft_f/ft_atoi.c		libft_f/ft_calloc.c		libft_f/ft_bzero.c			\
+			libft_f/ft_strjoin.c	libft_f/ft_strlen.c		libft_f/ft_lstadd_back.c		\
+			libft_f/ft_lstnew.c		libft_f/ft_lstlast.c	libft_f/ft_lstclear.c		\
+			init.c					parse_input.c			philos_life.c			\
+			time_stuff.c			write_actions.c			at_exit.c					\
 
-$(NAME)	:	$(OBJ) $(HEADER)
-# ar rcs philo.a $?
-		$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+SRC		=	$(addprefix ${FLDR_S},${SRCS})
+HDR		=	$(addprefix ${FLDR_H},${HDRS})
+OBJS	=	${SRC:%.c=%.o}
+MAIN	=	${MAIN_F}
 
-%.o	: %.c	$(HEADER)
-		$(CC) $(FLAGS) O2 -c $< -o $@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-clean	:
-	rm -rf $(SRCS)
+READY	=	Philo is ready
+READY_B	=	Philo_bonus is ready
+SWEPT	=	Directory was cleaned
+_GREEN	=	\e[32m
+_YELLOW	=	\e[33m
+_CYAN	=	\e[0;36m
+_PURPLE	=	\e[0;35m
+_END	=	\e[0m
 
-fclean	:
-	rm -rf $(NAME)
+# ------------------------------------------------------------------------------
 
-re	:
-	fclean all
+%.o:		%.c	${HDR}
+			@${CC} ${FLAGS} ${OPTFLAGS} -c -o $@ $<
+
+${NAME}: 	${OBJS} ${MAIN}
+			@${AR} ${LIB} $?
+			@${CC} ${FLAGS} ${OPTFLAGS} ${MAIN} ${LIB} -o ${NAME}
+			@printf "${_CYAN}${READY}${_END}\n"
+
+all:		${NAME}
+
+clean:
+			@${RM} ${OBJS} ${OBJS_B} ${LIB} ${LIB_B}
+			@printf "${_PURPLE}${SWEPT}${_END}\n"
+
+fclean:		clean
+			@${RM} ${NAME} ${NAME_B}
+
+re:			fclean all
+
+norm:
+			@norminette ${MAIN} ${HDR} ${SRC} ${MAIN_B} ${HDR_B} ${SRC_B}
+
+.PHONY: re all clean fclean bonus
