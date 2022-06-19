@@ -28,13 +28,13 @@
 # define MSG_THINK " is thinking\n"
 # define MSG_DIE " died\n"
 
-typedef struct all //s
+typedef struct all
 {
 	pthread_t		*thread;
 	unsigned long	philos_count;
-	unsigned long	t2die;
-	unsigned long	t2eat;
-	unsigned long	t2sleep;
+	unsigned long	time_die;
+	unsigned long	time_eat;
+	unsigned long	time_sleep;
 	long long		num_eat;
 	int				die_status;
 	int				i;
@@ -42,7 +42,7 @@ typedef struct all //s
 	pthread_mutex_t	stdout_stat;
 }	t_all;
 
-typedef struct ph //s2
+typedef struct ph
 {
 	unsigned long	philo_num;
 	unsigned long	eat_num;

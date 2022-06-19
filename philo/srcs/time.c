@@ -24,11 +24,11 @@ int	get_time_passed(t_all *all)
 	return (res);
 }
 
-void	smart_sleep(t_all *all, unsigned long t2do)
+void	smart_sleep(t_all *all, unsigned long time_do)
 {
 	unsigned long	end_time;
 
-	end_time = get_time_passed(all) + t2do;
+	end_time = get_time_passed(all) + time_do;
 	while ((unsigned long )get_time_passed(all) < end_time)
 		usleep(50);
 }

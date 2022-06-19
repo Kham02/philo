@@ -24,14 +24,14 @@ int	parse_input(int ac, char ***av, t_all **all)
 	i = 0;
 	(*all)->num_eat = -1;
 	(*all)->philos_count = ft_atoi((*av)[++i], &status[0]);
-	(*all)->t2die = ft_atoi((*av)[++i], &status[1]);
-	(*all)->t2eat = ft_atoi((*av)[++i], &status[2]);
-	(*all)->t2sleep = ft_atoi((*av)[++i], &status[3]);
+	(*all)->time_die = ft_atoi((*av)[++i], &status[1]);
+	(*all)->time_eat = ft_atoi((*av)[++i], &status[2]);
+	(*all)->time_sleep = ft_atoi((*av)[++i], &status[3]);
 	status[4] = -1;
 	if (ac == 6)
 		(*all)->num_eat = ft_atoi((*av)[++i], &status[4]);
 	if (!status[0] || !status[1] || !status[2] || !status[3] || !status[4] || \
-	(*all)->t2die > MAX || (*all)->t2eat > MAX || (*all)->t2sleep > MAX || \
+	(*all)->time_die > MAX || (*all)->time_eat > MAX || (*all)->time_sleep > MAX || \
 	(*all)->philos_count < 1 || !(*all)->num_eat)
 		return (error_write("Error: invalid arguments\n"));
 	return (0);

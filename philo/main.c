@@ -32,12 +32,12 @@ int	main(int ac, char **av)
 	t_all	*all;
 	t_list	*philo;
 
+	philo = NULL;
 	all = ft_calloc(1, sizeof(t_all));
 	if (!all)
 		return (error_write("Error: malloc\n"));
 	if (parse_input(ac, &av, &all))
 		return (-1);
-	philo = NULL;
 	if (philos_and_mutexes_init(&all, &philo))
 		return (-1);
 	if (gettimeofday(&all->start_time, NULL))

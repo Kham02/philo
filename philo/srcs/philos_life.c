@@ -20,7 +20,7 @@ static void	philo_eats(t_list *tmp)
 	write_action(tmp->all, tmp->philo_num, 'f');
 	write_action(tmp->all, tmp->philo_num, 'e');
 	tmp->last_meal = get_time_passed(tmp->all);
-	smart_sleep(tmp->all, tmp->all->t2eat);
+	smart_sleep(tmp->all, tmp->all->time_eat);
 	pthread_mutex_unlock(&tmp->fork);
 	pthread_mutex_unlock(&tmp->next->fork);
 }
@@ -39,7 +39,7 @@ void	*philo_life(void *philo)
 		if ((long long)tmp->eat_num == tmp->all->num_eat)
 			return (NULL);
 		write_action(tmp->all, tmp->philo_num, 's');
-		smart_sleep(tmp->all, tmp->all->t2sleep);
+		smart_sleep(tmp->all, tmp->all->time_sleep);
 		write_action(tmp->all, tmp->philo_num, 't');
 	}
 	return (NULL);
