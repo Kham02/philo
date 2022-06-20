@@ -18,9 +18,9 @@ static void	free_memory(t_all **all, t_list **philo)
 	(*philo)->prev->next = NULL;
 	ft_lstclear(philo);
 	(*all)->philos_count = 0;
-	(*all)->t2die = 0;
-	(*all)->t2eat = 0;
-	(*all)->t2sleep = 0;
+	(*all)->time_die = 0;
+	(*all)->time_eat = 0;
+	(*all)->time_sleep = 0;
 	(*all)->num_eat = 0;
 	(*all)->die_status = 0;
 	(*all)->i = 0;

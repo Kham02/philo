@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
 static int	ft_isspace(char c, int *m)
 {

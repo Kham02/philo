@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
 void	ft_bzero(void *s, size_t n)
 {

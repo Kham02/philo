@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/11 14:11:55 by gernesto          #+#    #+#             */
-/*   Updated: 2022/06/15 21:29:09 by estrong          ###   ########.fr       */
+/*   Created: 2022/06/15 22:06:27 by estrong           #+#    #+#             */
+/*   Updated: 2022/06/15 22:06:31 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
-void	ft_lstclear(t_list **lst)
+size_t	ft_strlen(const char *str)
 {
-	t_list	*tmp;
-	t_list	*prev_ptr;
+	int	i;
 
-	if (!lst)
-		return ;
-	tmp = *lst;
-	while (tmp != NULL)
-	{
-		prev_ptr = tmp->next;
-		tmp->philo_num = 0;
-		tmp->eat_num = 0;
-		tmp->last_meal = 0;
-		tmp->all = NULL;
-		tmp->prev = NULL;
-		free(tmp);
-		tmp = prev_ptr;
-	}
-	*lst = NULL;
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

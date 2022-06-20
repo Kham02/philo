@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../hdrs/philo.h"
+#include "../hdrs/philo_bonus.h"
 
 static int	check_all_eat_count(t_all *all, t_list *philo)
 {
@@ -41,7 +41,7 @@ void	loop_at_exit(t_all *all, t_list *philo)
 	while (philo)
 	{
 		cur_time = get_time_passed(philo->all);
-		if (cur_time >= philo->last_meal + philo->all->t2die
+		if (cur_time >= philo->last_meal + philo->all->time_die
 			&& philo->eat_num < (unsigned long )all->num_eat)
 		{
 			philo->all->die_status = 1;

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 22:06:49 by estrong           #+#    #+#             */
-/*   Updated: 2022/06/15 22:06:52 by estrong          ###   ########.fr       */
+/*   Created: 2022/06/15 22:06:54 by estrong           #+#    #+#             */
+/*   Updated: 2022/06/15 22:06:57 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_list	*tmp;
+	void	*ptr;
 
-	if (!new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = ft_lstlast(*lst);
-	tmp->next = new;
-	tmp->next->prev = tmp;
+	ptr = malloc(count * size);
+	if (ptr)
+		ft_bzero(ptr, count * size);
+	return (ptr);
 }

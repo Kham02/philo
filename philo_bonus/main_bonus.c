@@ -1,14 +1,14 @@
-#include "../hdrs/philo_bonus.h"
+#include "hdrs/philo_bonus.h"
 
 static void	free_all(t_all **all, t_philo **philo)
 {
 	free((*all)->family);
 	(*philo)->prev->next = NULL;
 	ft_lstclear(philo);
-	(*all)->philos_count = 0;
-	(*all)->t2die = 0;
-	(*all)->t2eat = 0;
-	(*all)->t2sleep = 0;
+	(*all)->count_ph = 0;
+	(*all)->time_die = 0;
+	(*all)->time_eat = 0;
+	(*all)->time_sleep = 0;
 	(*all)->num_eat = 0;
 	(*all)->die_status = 0;
 	free(*all);
@@ -31,9 +31,9 @@ int	main(int ac, char **av)
 		return (-1);
 	if (gettimeofday(&all->start_time, NULL))
 		return (error("Error: gettimeofday\n"));
-	if (sem_init(&all))
+	if (semaphores_init(&all))
 		return (-1);
-	if (proc(all, philo))
+	if (launch_thread_and_processes(all, philo))
 		return (-1);
 	free_all(&all, &philo);
 	return (0);

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 22:13:22 by gernesto          #+#    #+#             */
-/*   Updated: 2022/06/15 21:28:47 by estrong          ###   ########.fr       */
+/*   Created: 2022/06/15 22:06:49 by estrong           #+#    #+#             */
+/*   Updated: 2022/06/15 22:06:52 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
-t_list	*ft_lstnew(int num, t_all *all)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*list;
+	t_list	*tmp;
 
-	list = (t_list *) ft_calloc(1, sizeof(t_list));
-	if (list)
+	if (!new)
+		return ;
+	if (!*lst)
 	{
-		list->philo_num = num;
-		list->all = all;
+		*lst = new;
+		return ;
 	}
-	return (list);
+	tmp = ft_lstlast(*lst);
+	tmp->next = new;
+	tmp->next->prev = tmp;
 }

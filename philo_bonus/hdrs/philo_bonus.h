@@ -49,15 +49,15 @@ typedef struct s_philo
 	unsigned long	last_meal;
 	pthread_t		death_check;
 	t_all			*all;
-	struct s2		*next;
-	struct s2		*prev;
+	struct s_philo	*next;
+	struct s_philo	*prev;
 }	t_philo;
 
 /* ~~~~~~~~~~~~ fun ~~~~~~~~~~~~ */
 
 unsigned long	ft_lstsize(t_philo *lst);
-t_list			*ft_lstnew(int num, t_all *all);
-t_list			*ft_lstlast(t_philo *lst);
+t_philo			*ft_lstnew(int num, t_all *all);
+t_philo			*ft_lstlast(t_philo *lst);
 void			ft_lstclear(t_philo **lst);
 void			ft_lstadd_back(t_philo **lst, t_philo *new);
 void			*ft_calloc(size_t count, size_t size);
@@ -68,7 +68,7 @@ size_t			ft_strlen(const char *str);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
 
-int				error_write(char *msg);
+int				error(char *msg);
 int				parse_input(int ac, char ***av, t_all **all);
 int				semaphores_init(t_all **all);
 int				launch_thread_and_processes(t_all *all, t_philo *philo);

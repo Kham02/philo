@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: estrong <estrong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 22:06:54 by estrong           #+#    #+#             */
-/*   Updated: 2022/06/15 22:06:57 by estrong          ###   ########.fr       */
+/*   Created: 2021/10/11 14:11:55 by gernesto          #+#    #+#             */
+/*   Updated: 2022/06/15 21:29:09 by estrong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../hdrs/philo.h"
+#include "../../hdrs/philo_bonus.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_lstclear(t_list **lst)
 {
-	void	*ptr;
+	t_list	*tmp;
+	t_list	*prev_ptr;
 
-	ptr = malloc(count * size);
-	if (ptr)
-		ft_bzero(ptr, count * size);
-	return (ptr);
+	if (!lst)
+		return ;
+	tmp = *lst;
+	while (tmp != NULL)
+	{
+		prev_ptr = tmp->next;
+		tmp->philo_num = 0;
+		tmp->eat_num = 0;
+		tmp->last_meal = 0;
+		tmp->all = NULL;
+		tmp->prev = NULL;
+		free(tmp);
+		tmp = prev_ptr;
+	}
+	*lst = NULL;
 }
